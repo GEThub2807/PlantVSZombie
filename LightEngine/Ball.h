@@ -2,10 +2,10 @@
 
 #include "Entity.h"
 
-class Projectile : public Entity
+class Ball : public Entity
 {
 public:
-	Projectile(float radius, const sf::Color& color);
+	Ball(float radius, const sf::Color& color);
 
 protected:
 	void OnUpdate() override;

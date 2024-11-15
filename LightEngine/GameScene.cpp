@@ -1,7 +1,6 @@
 #include "GameScene.h"
 
-#include "Plant.h"
-#include "Zombie.h"
+#include "Player.h"
 #include "Debug.h"
 
 void GameScene::OnInitialize()
@@ -9,38 +8,46 @@ void GameScene::OnInitialize()
 	int width = GetWindowWidth();
 	int height = GetWindowHeight();
 
-	float plantRadius = 50.f;
-	float plantHeight = plantRadius * 2;
-	float spaceBetweenPlants = 20;
+	float playerRadius = 30.0f;
+	float playerHeight = playerRadius * 2;
+	float spaceBetweenPlayers = 125;
 
-	float totalHeight = (spaceBetweenPlants * 2) + (plantHeight * 3);
-	float spacing = height - totalHeight;
+	float totalHeight = (spaceBetweenPlayers * 2) + (playerHeight * 5);
+	float spacing = height - totalHeight; //taille de la fenetre - tout ce qu'il y a dans l'axe y de la fenetre 
 
-	float startX = plantRadius * 2;
-	float startY = plantRadius + (spacing / 2);
+	float startXBlue = playerRadius * 2;
+	float startXRed = width - (playerRadius * 2);
 
-	Plant* pPlants[3];
+	float startY = playerRadius + (spacing / 2); //L'espace du haut + la taille de la moitié de la balle
 
-	for (int i = 0; i < 3; i++) 
+
+	Player* BlueTeam[5];
+	Player* RedTeam[5];
+
+	for (int i = 0; i < 5; i++) 
 	{
-		pPlants[i] = CreateEntity<Plant>(plantRadius, sf::Color::Green);
-		pPlants[i]->SetPosition(startX, startY, 0.5f, 0.5f);
-		pPlants[i]->SetAreaIndex(i);
+		BlueTeam[i] = CreateEntity<Player>(playerRadius, sf::Color::Green);
+		BlueTeam[i]->SetPosition(startXBlue, startY, 0.5f, 0.5f);
+		BlueTeam[i]->SetAreaIndex(i); //Définit la lane où se trouve l'objet
 
-		int xMin = startX + plantHeight;
-		int yMin = startY - plantRadius;
-		int xMax = width;
-		int yMax = startY + plantRadius;
+		RedTeam[i] = CreateEntity<Player>(playerRadius, sf::Color::Green);
+		RedTeam[i]->SetPosition(startXRed, startY, 0.5f, 0.5f);
+		RedTeam[i]->SetAreaIndex(i); //Définit la lane où se trouve l'objet
 
-		mAreas[i] = { xMin, yMin, xMax, yMax };
+		int xMin = 0; //balle * balle
+		int yMin = startY - playerRadius;
+		int xMax = width + 1; //Largeur de la fenetre
+		int yMax = startY + playerRadius; //balle + balle + startY
 
-		startY += plantHeight + spaceBetweenPlants;
+		mAreas[i] = { xMin, yMin - static_cast <int>(playerRadius), xMax, yMax + static_cast <int>(playerRadius) }; //Lane
+
+		startY += spaceBetweenPlayers; //espace entre lane
 	}
 }
 
 void GameScene::OnUpdate()
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		const AABB& aabb = mAreas[i];
 
@@ -50,7 +57,7 @@ void GameScene::OnUpdate()
 
 int GameScene::GetClickedArea(int x, int y) const
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		const AABB* aabb = &mAreas[i];
 
@@ -63,37 +70,37 @@ int GameScene::GetClickedArea(int x, int y) const
 
 void GameScene::OnEvent(const sf::Event& event)
 {
-	if (event.type != sf::Event::EventType::MouseButtonPressed)
-		return;
+	//if (event.type != sf::Event::EventType::MouseButtonPressed)
+	//	return;
 
-	int index = GetClickedArea(event.mouseButton.x, event.mouseButton.y);
+	//int index = GetClickedArea(event.mouseButton.x, event.mouseButton.y);
 
-	if(index == -1)
-		return;
+	//if(index == -1)
+	//	return;
 
-	const AABB* clickedArea = &mAreas[index];
+	//const AABB* clickedArea = &mAreas[index];
 
-	int y = clickedArea->yMin + (clickedArea->yMax - clickedArea->yMin) / 2;
+	//int y = clickedArea->yMin + (clickedArea->yMax - clickedArea->yMin) / 2;
 
-	Zombie* pZombie = CreateEntity<Zombie>(25, sf::Color::Red);
-	pZombie->SetPosition(event.mouseButton.x, y, 0.5f, 0.5f);
-	pZombie->SetLane(index);
+	//Zombie* pZombie = CreateEntity<Zombie>(25, sf::Color::Red);
+	//pZombie->SetPosition(event.mouseButton.x, y, 0.5f, 0.5f);
+	//pZombie->SetLane(index);
 
-	mLaneZombieCount[index]++;
+	//mLaneZombieCount[index]++;
 }
 
-bool GameScene::IsZombieInArea(int index) const
-{
-	_ASSERT(index >= 0 && index < 3);
+//bool GameScene::IsZombieInArea(int index) const
+//{
+//	_ASSERT(index >= 0 && index < 5);
+//
+//	return mLaneZombieCount[index] > 0;
+//}
 
-	return mLaneZombieCount[index] > 0;
-}
-
-void GameScene::OnDestroyZombie(int lane)
-{
-	_ASSERT(lane >= 0 && lane < 3);
-	if(mLaneZombieCount[lane] <= 0)
-		return;
-
-	mLaneZombieCount[lane]--;
-}
+//void GameScene::OnDestroyZombie(int lane)
+//{
+//	_ASSERT(lane >= 0 && lane < 5);
+//	if(mLaneZombieCount[lane] <= 0)
+//		return;
+//
+//	mLaneZombieCount[lane]--;
+//}

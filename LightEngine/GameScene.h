@@ -25,13 +25,14 @@ class GameScene : public Scene
 public:
 	enum Tag
 	{
-		PLANT,
-		ZOMBIE,
-		PROJECTILE
+		REDTEAM,
+		BLUETEAM,
+		BALL,
 	};
 
-	int mLaneZombieCount[3] = {0, 0, 0};		
-	AABB mAreas[3];
+	int mLaneZombieCount[5] = {0, 0, 0, 0, 0};		
+	AABB mAreas[5];
+
 
 private:
 	int GetClickedArea(int x, int y) const;
