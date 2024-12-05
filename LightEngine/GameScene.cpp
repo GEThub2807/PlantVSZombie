@@ -70,37 +70,37 @@ int GameScene::GetClickedArea(int x, int y) const
 
 void GameScene::OnEvent(const sf::Event& event)
 {
-	//if (event.type != sf::Event::EventType::MouseButtonPressed)
-	//	return;
+	if (event.type != sf::Event::EventType::MouseButtonPressed)
+		return;
 
-	//int index = GetClickedArea(event.mouseButton.x, event.mouseButton.y);
+	int index = GetClickedArea(event.mouseButton.x, event.mouseButton.y);
 
-	//if(index == -1)
-	//	return;
+	if(index == -1)
+		return;
 
-	//const AABB* clickedArea = &mAreas[index];
+	const AABB* clickedArea = &mAreas[index];
 
-	//int y = clickedArea->yMin + (clickedArea->yMax - clickedArea->yMin) / 2;
+	int y = clickedArea->yMin + (clickedArea->yMax - clickedArea->yMin) / 2;
 
-	//Zombie* pZombie = CreateEntity<Zombie>(25, sf::Color::Red);
-	//pZombie->SetPosition(event.mouseButton.x, y, 0.5f, 0.5f);
-	//pZombie->SetLane(index);
-
-	//mLaneZombieCount[index]++;
+	Zombie* pZombie = CreateEntity<Zombie>(25, sf::Color::Red);
+	pZombie->SetPosition(event.mouseButton.x, y, 0.5f, 0.5f);
+	pZombie->SetLane(index);
+	
+	mLaneZombieCount[index]++;
 }
 
-//bool GameScene::IsZombieInArea(int index) const
-//{
-//	_ASSERT(index >= 0 && index < 5);
-//
-//	return mLaneZombieCount[index] > 0;
-//}
+bool GameScene::IsZombieInArea(int index) const
+{
+	_ASSERT(index >= 0 && index < 5);
 
-//void GameScene::OnDestroyZombie(int lane)
-//{
-//	_ASSERT(lane >= 0 && lane < 5);
-//	if(mLaneZombieCount[lane] <= 0)
-//		return;
-//
-//	mLaneZombieCount[lane]--;
-//}
+	return mLaneZombieCount[index] > 0;
+}
+
+void GameScene::OnDestroyZombie(int lane)
+{
+	_ASSERT(lane >= 0 && lane < 5);
+	if(mLaneZombieCount[lane] <= 0)
+		return;
+
+	mLaneZombieCount[lane]--;
+}
