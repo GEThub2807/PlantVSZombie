@@ -1,6 +1,6 @@
 #include "GameScene.h"
 
-#include "Player.h"
+#include "Plant.h"
 #include "Debug.h"
 
 void GameScene::OnInitialize()
@@ -20,19 +20,11 @@ void GameScene::OnInitialize()
 
 	float startY = playerRadius + (spacing / 2); //L'espace du haut + la taille de la moitié de la balle
 
-
-	Player* BlueTeam[5];
-	Player* RedTeam[5];
-
-	for (int i = 0; i < 5; i++) 
+	for (int i = 0; i < 3; i++) 
 	{
-		BlueTeam[i] = CreateEntity<Player>(playerRadius, sf::Color::Green);
-		BlueTeam[i]->SetPosition(startXBlue, startY, 0.5f, 0.5f);
-		BlueTeam[i]->SetAreaIndex(i); //Définit la lane où se trouve l'objet
-
-		RedTeam[i] = CreateEntity<Player>(playerRadius, sf::Color::Green);
-		RedTeam[i]->SetPosition(startXRed, startY, 0.5f, 0.5f);
-		RedTeam[i]->SetAreaIndex(i); //Définit la lane où se trouve l'objet
+		plant = CreateEntity<Plant>(playerRadius, sf::Color::Green);
+		plant->SetPosition(startXBlue, startY, 0.5f, 0.5f);
+		plant->SetAreaIndex(i); //Définit la lane où se trouve l'objet
 
 		int xMin = 0; //balle * balle
 		int yMin = startY - playerRadius;

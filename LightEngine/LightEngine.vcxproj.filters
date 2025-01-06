@@ -46,7 +46,7 @@
     <ClCompile Include="StateMachine.cpp">
       <Filter>Engine\StateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAction.cpp">
+    <ClCompile Include="PlantAction.cpp">
       <Filter>Game\PlantStateMachine</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp">
@@ -60,12 +60,6 @@
     </ClCompile>
     <ClCompile Include="Behaviour.inl">
       <Filter>Engine\StateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.h">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,7 +99,7 @@
     <ClInclude Include="StateMachine.h">
       <Filter>Engine\StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAction.h">
+    <ClInclude Include="PlantAction.h">
       <Filter>Game\PlantStateMachine</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h">

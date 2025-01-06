@@ -25,13 +25,16 @@ class GameScene : public Scene
 public:
 	enum Tag
 	{
-		REDTEAM,
-		BLUETEAM,
-		BALL,
+		PLANT,
+		ZOMBIE,
+		PROJECTILE,
 	};
 
 	int mLaneZombieCount[5] = {0, 0, 0, 0, 0};		
 	AABB mAreas[5];
+
+	Plant* pPlant;
+	Zombie* pZombie;
 
 
 private:

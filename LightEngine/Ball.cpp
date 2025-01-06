@@ -4,7 +4,7 @@
 
 Ball::Ball(float radius, const sf::Color& color) : Entity(radius, color)
 {
-	SetTag(GameScene::Tag::BALL);
+	SetTag(GameScene::Tag::PROJECTILE);
 
 	SetDirection(1.0f, 0.0f, 100.0f);
 }
@@ -21,8 +21,8 @@ void Ball::OnUpdate()
 
 void Ball::OnCollision(Entity* pCollidedWith)
 {
-	if (pCollidedWith->IsTag(GameScene::Tag::REDTEAM))
+	if (pCollidedWith->IsTag(GameScene::Tag::ZOMBIE))
 	{
-		//Destroy();
+		Destroy();
 	}
 }

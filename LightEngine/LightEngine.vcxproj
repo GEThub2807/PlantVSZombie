@@ -21,16 +21,14 @@
   <ItemGroup>
     <ClCompile Include="Behaviour.cpp" />
     <ClCompile Include="Behaviour.inl" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlantCondition.cpp" />
     <ClCompile Include="Plant.cpp" />
-    <ClCompile Include="PlayerAction.cpp" />
+    <ClCompile Include="PlantAction.cpp" />
     <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Player.h" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Transition.cpp" />
@@ -47,7 +45,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="PlantCondition.h" />
     <ClInclude Include="Plant.h" />
-    <ClInclude Include="PlayerAction.h" />
+    <ClInclude Include="PlantAction.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="StateMachine.h" />
