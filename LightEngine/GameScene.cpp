@@ -22,9 +22,9 @@ void GameScene::OnInitialize()
 
 	for (int i = 0; i < 3; i++) 
 	{
-		plant = CreateEntity<Plant>(playerRadius, sf::Color::Green);
-		plant->SetPosition(startXBlue, startY, 0.5f, 0.5f);
-		plant->SetAreaIndex(i); //Définit la lane où se trouve l'objet
+		pPlant = CreateEntity<Plant>(playerRadius, sf::Color::Green);
+		pPlant->SetPosition(startXBlue, startY, 0.5f, 0.5f);
+		pPlant->SetAreaIndex(i); //Définit la lane où se trouve l'objet
 
 		int xMin = 0; //balle * balle
 		int yMin = startY - playerRadius;
@@ -74,7 +74,7 @@ void GameScene::OnEvent(const sf::Event& event)
 
 	int y = clickedArea->yMin + (clickedArea->yMax - clickedArea->yMin) / 2;
 
-	Zombie* pZombie = CreateEntity<Zombie>(25, sf::Color::Red);
+	pZombie = CreateEntity<Zombie>(25, sf::Color::Red);
 	pZombie->SetPosition(event.mouseButton.x, y, 0.5f, 0.5f);
 	pZombie->SetLane(index);
 	
